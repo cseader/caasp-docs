@@ -1,0 +1,15 @@
+= CaaSP POC Guide
+(OpenStack Air Gap Deployment) 
+
+Doc Writer <cseader@suse.com> +
+v0.1, 07-03-2019
+
+This guide is designed to help in the setup of CaaS Platform running on OpenStack in an air gapped or non-airgapped environment. It goes through the steps manually to accomplish a deployment which can be installed without any access to the internet.
+
+== 1. Deployment Preparation
+Follow these steps of preparation to ensure your OpenStack tenant is ready for a deployment of SUSE CaaS Platform.
+
+=== 1.1 Create Security Groups
+There are a few security groups which we will need to create before the deployment so that the right ports are open for the installation and execution environment. We will create the following security groups called caasp-base, caasp-master, caasp-worker, and caasp-master-lb for use in our cluster setup.  In order to start we will need to open the Security Groups in the OpenStack Dashboard under Network Topology as seen here in this screenshot.
+
+
