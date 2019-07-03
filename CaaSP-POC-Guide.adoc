@@ -11,5 +11,8 @@ Follow these steps of preparation to ensure your OpenStack tenant is ready for a
 
 === 1.1 Create Security Groups
 There are a few security groups which we will need to create before the deployment so that the right ports are open for the installation and execution environment. We will create the following security groups called caasp-base, caasp-master, caasp-worker, and caasp-master-lb for use in our cluster setup.  In order to start we will need to open the Security Groups in the OpenStack Dashboard under Network Topology as seen here in this screenshot.
+[#img-section1.1-img1]
+.Security Groups
+image::images/Section1.1-img1.png[]
 
 
