@@ -14,5 +14,134 @@ There are a few security groups which we will need to create before the deployme
 [#img-section1.1-img1]
 .Security Groups
 image::images/Section1.1-img1.png[]
+Notice that default is already there. Click Create Security Group so we can add additional groups.
 
+The Create Security Group dialogue appears.
+[#img-section1.1-img2]
+.Create Security Group
+image::images/Section1.1-img2.png[]
+Fill in the name with caasp-base and Click Create Security Group.
+[#img-section1.1-img3]
+.Security Groups
+image::images/Section1.1-img3.png[]
+The results now give you a new security group called caasp-base. Lets now Click Manage Rules under actions so we can add all of the required ports that need to be open for proper communication.
+[#img-section1.1-img4]
+.Security Group Rules
+image::images/Section1.1-img4.png[]
+Click Add Rule and you will see the Add Rule wizard. Make sure you add the following to this security group one at a time. Once your complete then go back to the security groups landing page.
+
+ * All ICMP
+ * 22 (SSH) tcp
+ * 2379 tcp
+ * 8472 udp
+
+Repeat the previous steps for creating security groups for the remaining groups below with their respective security group rules.
+
+Security Group: caasp-master::
+Rules: :::
+ * 2380 tcp
+ * 6443 tcp
+ * 8285 udp
+ * 30000-32768 tcp
+ * 30000-32768 udp
+
+Security Group: caasp-worker::
+Rules: :::  
+ * 80 tcp
+ * 443 tcp
+ * 8080 tcp
+ * 8081 tcp
+ * 2380 tcp
+ * 10250 tcp
+ * 8285 udp
+ * 30000-32768 tcp
+ * 30000-32768 udp
+
+Security Group: caasp-master-lb::
+Rules: ::: 
+ * 6443 tcp
+
+=== 1.2 Create Network Router
+We will now create a network for our CaaSP deployment that our cluster will use for communication for internal use. The network we will create is the caasp-net along with a subnet for IP binding. We will then create a router interface, and a router which will bind the internal and external networks.
+
+==== 1.2.1 Create Network Router through CLI 
+
+[source,shell]
+----
+$ openstack network create caasp-net 
+$ openstack subnet create caasp_subnet --network caasp-net \ --subnet-range 10.0.2.0/24 
+$ openstack router create caasp-net-router 
+$ openstack router set caasp-net-router --external-gateway floating 
+$ openstack router add subnet caasp-net-router caasp_subnet
+----
+
+
+==== 1.2.2 Create Network Router through OpenStack Horizon Dashboard
+
+In order to create the network we select Networks in our dashboard to view all available networks as we see below.
+
+[#img-section1.2-img1]
+.Networks
+image::images/Section1.2-img1.png[]
+
+Click on Create Network, and give it a name of caasp-net, keep the rest of the defaults and Click Next.
+
+[#img-section1.2-img2]
+.Create Network
+image::images/Section1.2-img2.png[]
+
+We can now fill in the Subnet name which will be caasp-net-subnet and the network cidr for the subnet which can be anything you want. In this example we use 192.168.20.0/24 . The Gateway can be left blank and it will choose the first available address in the subnet automatically. Click Next when your complete.
+
+[#img-section1.2-img3]
+.Create Network Subnet
+image::images/Section1.2-img3.png[]
+
+Here we don’t change anything under the Subnet Details. Just click Create. 
+
+[#img-section1.2-img4]
+.Create Network Subnet Details
+image::images/Section1.2-img4.png[]
+
+We now have a network called caasp-net created as seen in our overview you see below which has an associated subnet called caasp-net-subnet. 
+
+[#img-section1.2-img5]
+.Networks
+image::images/Section1.2-img5.png[]
+
+Now we will need to add a router for public and caasp-net routing so our cluster is accessible through the public network.
+To create a router we select Routers on the left pane to view all available routers to our tenant. 
+
+[#img-section1.2-img6]
+.Routers
+image::images/Section1.2-img6.png[]
+
+Now we Click Create Router. Fill in the router name of caasp-net-router and select any available external network that you want to use for this project. 
+
+[#img-section1.2-img7]
+.Create Router
+image::images/Section1.2-img7.png[]
+
+Now Click Create Router. Once created we can view the overview of the router and it shows we now have a router IP assigned on the floating or external network we associated to it.
+
+[#img-section1.2-img8]
+.caasp-net-router Overview
+image::images/Section1.2-img8.png[]
+
+If you click on Interfaces we can add another interface. Click Add Interface.
+
+[#img-section1.2-img9]
+.caasp-net-router Interfaces
+image::images/Section1.2-img9.png[]
+
+We can now select the Subnet for caasp-net from the options.
+
+[#img-section1.2-img10]
+.Add Interface
+image::images/Section1.2-img10.png[]
+
+Click Submit and we will again see the overview of our router interfaces.
+
+[#img-section1.2-img11]
+.caasp-net-router Interfaces
+image::images/Section1.2-img11.png[]
 
