@@ -145,3 +145,21 @@ Click Submit and we will again see the overview of our router interfaces.
 .caasp-net-router Interfaces
 image::images/Section1.2-img11.png[]
 
+=== 2 Setup an RMT Server
+Download image for SLES 15 JeOS OpenStack qcow2 +
+Register image 
+[source,shell]
+----
+# SUSEConnect -r
+----
+Install rmt-server 
+[source,shell]
+----
+# zypper in rmt-server yast2-rmt
+----
+
+Mirror all repos relating to SLES 15 SP1 and CaaSP 4.0 (Beta 3)
+
+Setup Docker Registry for mirroring CaaSP and CAP containers.
+
+
