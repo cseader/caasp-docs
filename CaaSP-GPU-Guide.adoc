@@ -3,6 +3,20 @@
 Doc Writer <cseader@suse.com> +
 v0.1, 07-22-2019
 
-This guide is designed to help in the setup of SUSE CaaS Platform with GPU support as a Daemonset
+This guide is designed to help in the setup of SUSE CaaS Platform with GPU support as a Daemonset. 
 
-== 1. 
+== 1. Prerequesites 
+Make sure you have a SUSE CaaS Platform setup and deployed before moving on to the next steps.
+
+== 1.1 Worker Host preparation
+
+== 1. Deploy the NVIDIA Device Plugin Daemonset
+
+
+
+== References
+
+https://www.suse.com/c/how-to-do-deep-machine-learning-tasks-inside-kvm-guests-with-a-passed-through-nvidia-gpu/
+https://github.com/NVIDIA/k8s-device-plugin
+https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/master/nvidia-device-plugin.yml
+
